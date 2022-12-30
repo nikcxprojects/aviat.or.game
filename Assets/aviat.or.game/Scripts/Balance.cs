@@ -14,17 +14,17 @@ public class Balance : MonoBehaviour
     private void Awake()
     {
         Text textComponent = transform.GetChild(0).GetComponent<Text>();
-        //WheelSpinner.OnEndRolling += (value) =>
-        //{
-        //    Count += value;
-        //    textComponent.text = $"{Count}";
-        //};
 
-        //Manager.OnEndRolling += (value) =>
-        //{
-        //    Count += value;
-        //    textComponent.text = $"{Count}";
-        //};
+        Product.OnBuyItem += (price) =>
+        {
+            if(price > Count)
+            {
+                return false;
+            }
+
+            Count -= price;
+            return true;
+        };
 
         textComponent.text = $"{Count}";
     }
