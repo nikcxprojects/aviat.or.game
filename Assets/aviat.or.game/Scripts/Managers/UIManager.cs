@@ -102,4 +102,10 @@ public class UIManager : MonoBehaviour
             FindObjectOfType<Airplane>().ResetMe();
         }
     }
+
+    public void CashOut()
+    {
+        Product.OnBuyItem?.Invoke(Mathf.FloorToInt(Cash.Count));
+        Cancel();
+    }
 }
