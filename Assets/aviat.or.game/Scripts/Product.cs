@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.UI;
 
 public class Product : MonoBehaviour
@@ -13,14 +14,26 @@ public class Product : MonoBehaviour
     [SerializeField] ProductType productType;
 
     public static Func<int, bool> OnBuyItem { get; set; }
-    public static Action<ProductType> OnProductSelected { get; set; }
+    public static Action<ProductType, int> OnProductSelected { get; set; }
 
     private void Start()
     {
+        transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
+        {
+            OnProductSelected.Invoke(productType, transform.GetSiblingIndex());
+
+            var products = FindObjectsOfType<Product>().Where(product => product.productType == productType);
+            foreach (Product product in products)
+            {
+                product.SetActive(product.transform.GetSiblingIndex() == transform.GetSiblingIndex());
+            }
+        });
+
         if (WasBought)
         {
             transform.GetChild(1).gameObject.SetActive(false);
             transform.GetChild(2).gameObject.SetActive(true);
+
             return;
         }
 
@@ -35,13 +48,16 @@ public class Product : MonoBehaviour
                 PlayerPrefs.Save();
             }
         });
+    }
 
-        transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
+    public void SetActive(bool IsActive)
+    {
+        if(!WasBought)
         {
-            OnProductSelected.Invoke(productType);
+            return;
+        }
 
-            transform.GetChild(2).gameObject.SetActive(false);
-            transform.GetChild(3).gameObject.SetActive(true);
-        });
+        transform.GetChild(2).gameObject.SetActive(!IsActive);
+        transform.GetChild(3).gameObject.SetActive(IsActive);
     }
 }
