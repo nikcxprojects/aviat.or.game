@@ -11,4 +11,14 @@ public static class PlayerPrefsUtility
     {
         PlayerPrefs.SetInt("airplane", id);
     }
+
+    public static Sprite GetBackgroundSprite
+    {
+        get => Resources.Load<Sprite>($"Backgrounds/{PlayerPrefs.GetInt("background")}");
+    }
+
+    public static void SetBackgroundSprite(int id)
+    {
+        PlayerPrefs.SetInt("background", id);
+    }
 }
