@@ -9,6 +9,9 @@ public class Coefficient : MonoBehaviour
     {
         TextComponent = transform.GetChild(0).GetComponent<Text>();
 
+        Count = 0;
+        TextComponent.text = $"x{Count}";
+
         Airplane.OnGrowing += () =>
         {
             InvokeRepeating(nameof(Growing), 0.0f, 1.0f);
@@ -18,6 +21,11 @@ public class Coefficient : MonoBehaviour
         {
             Count = 0;
             TextComponent.text = $"x{Count}";
+        };
+
+        Airplane.OnEndFly += () =>
+        {
+            CancelInvoke(nameof(Growing));
         };
     }
 
