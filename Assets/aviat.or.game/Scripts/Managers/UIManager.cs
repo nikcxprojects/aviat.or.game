@@ -10,6 +10,32 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject airplanes;
     [SerializeField] GameObject backgrounds;
 
+    [Space(10)]
+    [SerializeField] GameObject bet;
+    [SerializeField] GameObject cashOut;
+    [SerializeField] GameObject cancel;
+
+    private void Awake()
+    {
+        Airplane.OnStartFly += () =>
+        {
+            bet.SetActive(false);
+            cancel.SetActive(true);
+        };
+
+        Airplane.OnGrowing += () =>
+        {
+            cancel.SetActive(false);
+            cashOut.SetActive(true);
+        };
+
+        Airplane.OnEndFly += () =>
+        {
+            cashOut.SetActive(false);
+            bet.SetActive(true);
+        };
+    }
+
     public void OpenShop(int id)
     {
         menu.SetActive(false);
