@@ -18,12 +18,6 @@ public class Product : MonoBehaviour
 
     private void Start()
     {
-        var products = FindObjectsOfType<Product>().Where(product => product.productType == productType);
-        foreach (Product product in products)
-        {
-            product.SetActive(product.transform.GetSiblingIndex() == PlayerPrefsUtility.GetActiveProduct($"{productType}"));
-        }
-
         transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
         {
             OnProductSelected.Invoke(productType, transform.GetSiblingIndex());
@@ -41,6 +35,12 @@ public class Product : MonoBehaviour
         {
             transform.GetChild(1).gameObject.SetActive(false);
             transform.GetChild(2).gameObject.SetActive(true);
+
+            var products = FindObjectsOfType<Product>().Where(product => product.productType == productType);
+            foreach (Product product in products)
+            {
+                product.SetActive(product.transform.GetSiblingIndex() == PlayerPrefsUtility.GetActiveProduct($"{productType}"));
+            }
 
             return;
         }
@@ -65,6 +65,7 @@ public class Product : MonoBehaviour
             return;
         }
 
+        transform.GetChild(1).gameObject.SetActive(!IsActive);
         transform.GetChild(2).gameObject.SetActive(!IsActive);
         transform.GetChild(3).gameObject.SetActive(IsActive);
     }
