@@ -18,6 +18,12 @@ public class Product : MonoBehaviour
 
     private void Start()
     {
+        var products = FindObjectsOfType<Product>().Where(product => product.productType == productType);
+        foreach (Product product in products)
+        {
+            product.SetActive(product.transform.GetSiblingIndex() == PlayerPrefsUtility.GetActiveProduct($"{productType}"));
+        }
+
         transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
         {
             OnProductSelected.Invoke(productType, transform.GetSiblingIndex());
@@ -27,6 +33,8 @@ public class Product : MonoBehaviour
             {
                 product.SetActive(product.transform.GetSiblingIndex() == transform.GetSiblingIndex());
             }
+
+            PlayerPrefsUtility.SetActiveProduct(productType, transform.GetSiblingIndex());
         });
 
         if (WasBought)
