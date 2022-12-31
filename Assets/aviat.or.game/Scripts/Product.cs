@@ -17,21 +17,21 @@ public class Product : MonoBehaviour
 
     private void Start()
     {
+        if (WasBought)
+        {
+            transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(2).gameObject.SetActive(true);
+            return;
+        }
+
         GetComponent<Button>().onClick.AddListener(() =>
         {
-            if(WasBought)
-            {
-                transform.GetChild(1).gameObject.SetActive(false);
-                transform.GetChild(2).gameObject.SetActive(true);
-                return;
-            }
-
             if(OnBuyItem.Invoke(price))
             {
                 transform.GetChild(1).gameObject.SetActive(false);
                 transform.GetChild(2).gameObject.SetActive(true);
 
-                PlayerPrefs.SetInt("${productType}({price})", 1);
+                PlayerPrefs.SetInt($"{productType}({price})", 1);
                 PlayerPrefs.Save();
             }
         });
