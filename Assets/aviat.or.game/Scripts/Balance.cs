@@ -23,6 +23,8 @@ public class Balance : MonoBehaviour
             }
 
             Count -= price;
+            textComponent.text = $"{Count}";
+
             return true;
         };
 
