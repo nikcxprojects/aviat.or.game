@@ -13,7 +13,7 @@ public class Product : MonoBehaviour
     [SerializeField] ProductType productType;
 
     public static Func<int, bool> OnBuyItem { get; set; }
-    public static Func<ProductType, bool> OnProductSelected { get; set; }
+    public static Action<ProductType> OnProductSelected { get; set; }
 
     private void Start()
     {
@@ -38,7 +38,10 @@ public class Product : MonoBehaviour
 
         transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
         {
-            OnProductSelected?.Invoke(productType);
+            OnProductSelected.Invoke(productType);
+
+            transform.GetChild(2).gameObject.SetActive(false);
+            transform.GetChild(3).gameObject.SetActive(true);
         });
     }
 }
