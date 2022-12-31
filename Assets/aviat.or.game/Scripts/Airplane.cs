@@ -39,7 +39,7 @@ public class Airplane : MonoBehaviour
     private IEnumerator Fly()
     {
         float et = 0.0f;
-        float duration = 1.0f;
+        float duration = Random.Range(2.5f, 4.0f);
 
         while(et < duration)
         {
