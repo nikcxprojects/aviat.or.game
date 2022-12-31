@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 
     public static Action OnGameStarted { get; set; }
 
+    public int bidCount;
+
     public void StartGame()
     {
         OnGameStarted?.Invoke();

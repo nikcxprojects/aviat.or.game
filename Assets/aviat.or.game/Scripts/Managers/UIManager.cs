@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject bet;
     [SerializeField] GameObject cashOut;
     [SerializeField] GameObject cancel;
+
+    [Space(10)]
+    [SerializeField] Text bidText;
 
     private void Awake()
     {
@@ -64,5 +68,16 @@ public class UIManager : MonoBehaviour
     {
         menu.SetActive(false);
         game.SetActive(true);
+    }
+
+    public void SetBid(int dir)
+    {
+        GameManager.Instance.bidCount += dir;
+        if(GameManager.Instance.bidCount <0)
+        {
+            GameManager.Instance.bidCount = 0;
+        }
+
+        bidText.text = $"{GameManager.Instance.bidCount}";
     }
 }
