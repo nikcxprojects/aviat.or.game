@@ -21,4 +21,10 @@ public class Airplane : MonoBehaviour
             Image.SetNativeSize();
         };
     }
+
+    private void OnEnable()
+    {
+        Image.sprite = PlayerPrefsUtility.GetAirplaneplaneSprite;
+        Image.SetNativeSize();
+    }
 }
