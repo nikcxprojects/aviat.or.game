@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        OnGameStarted?.Invoke();
+        if(Product.OnBuyItem.Invoke(bidCount))
+        {
+            OnGameStarted?.Invoke();
+        }
     }
 }

@@ -11,13 +11,13 @@ public class Balance : MonoBehaviour
         set => PlayerPrefs.SetInt(key, value);
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         Text textComponent = transform.GetChild(0).GetComponent<Text>();
 
         Product.OnBuyItem += (price) =>
         {
-            if(price > Count)
+            if (price > Count)
             {
                 return false;
             }
@@ -29,5 +29,10 @@ public class Balance : MonoBehaviour
         };
 
         textComponent.text = $"{Count}";
+    }
+
+    private void OnDisable()
+    {
+        Product.OnBuyItem = null;
     }
 }

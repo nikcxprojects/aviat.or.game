@@ -10,7 +10,7 @@ public class Product : MonoBehaviour
         get => PlayerPrefs.HasKey($"{productType}({price})");
     }
 
-    [SerializeField] int price;
+    public int price;
     [SerializeField] ProductType productType;
 
     public static Func<int, bool> OnBuyItem { get; set; }
