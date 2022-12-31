@@ -73,4 +73,12 @@ public class Airplane : MonoBehaviour
 
         OnEndFly?.Invoke();
     }
+
+    public void ResetMe()
+    {
+        Image.enabled = false;
+        transform.localPosition = Init;
+        StopCoroutine(nameof(Fly));
+        OnEndFly?.Invoke();
+    }
 }

@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
         Airplane.OnEndFly += () =>
         {
             cashOut.SetActive(false);
+            cancel.SetActive(false);
             bet.SetActive(true);
         };
     }
@@ -49,13 +50,13 @@ public class UIManager : MonoBehaviour
     {
         menu.SetActive(false);
         shop.SetActive(true);
-        
-        if(id == 0)
+
+        if (id == 0)
         {
             airplanes.SetActive(true);
             backgrounds.SetActive(false);
         }
-        else if(id == 1)
+        else if (id == 1)
         {
             airplanes.SetActive(false);
             backgrounds.SetActive(true);
@@ -64,6 +65,8 @@ public class UIManager : MonoBehaviour
 
     public void Menu()
     {
+        Cancel();
+
         game.SetActive(false);
         shop.SetActive(false);
         menu.SetActive(true);
@@ -78,7 +81,7 @@ public class UIManager : MonoBehaviour
     public void SetBid(int dir)
     {
         GameManager.Instance.bidCount += dir;
-        if(GameManager.Instance.bidCount <0)
+        if (GameManager.Instance.bidCount < 0)
         {
             GameManager.Instance.bidCount = 0;
         }
@@ -90,5 +93,13 @@ public class UIManager : MonoBehaviour
     {
         GameManager.Instance.bidCount = bid;
         bidText.text = $"{GameManager.Instance.bidCount}";
+    }
+
+    public void Cancel()
+    {
+        if (FindObjectOfType<Airplane>())
+        {
+            FindObjectOfType<Airplane>().ResetMe();
+        }
     }
 }
