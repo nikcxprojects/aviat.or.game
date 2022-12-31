@@ -54,7 +54,7 @@ public class Airplane : MonoBehaviour
         OnStartFly?.Invoke();
 
         float et = 0.0f;
-        float duration = Random.Range(2.5f, 4.0f);
+        float duration = Random.Range(1.5f, 2.5f);
 
         while(et < duration)
         {
@@ -67,7 +67,7 @@ public class Airplane : MonoBehaviour
         transform.localPosition = Target;
         OnGrowing?.Invoke();
 
-        float rv = Random.Range(5.0f, 10.0f);
+        float rv = Random.Range(5.0f, 30.0f);
         yield return new WaitForSeconds(rv);
         Image.enabled = false;
 

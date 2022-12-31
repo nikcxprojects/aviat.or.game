@@ -25,6 +25,8 @@ public class Balance : MonoBehaviour
             Count -= price;
             textComponent.text = $"{Count}";
 
+            FindObjectOfType<SFXManager>().CashOut();
+
             return true;
         };
 

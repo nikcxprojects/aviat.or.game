@@ -4,16 +4,30 @@ public class SFXManager : MonoBehaviour
 {
     [SerializeField] AudioSource sfxSource;
 
+    [Space(10)]
+    [SerializeField] AudioClip win;
+    [SerializeField] AudioClip lose;
+
     private void Start()
     {
-        //Ball.OnCollided += () =>
-        //{
-        //    if (sfxSource.isPlaying)
-        //    {
-        //        sfxSource.Stop();
-        //    }
+        Airplane.OnEndFly += () =>
+        {
+            if (sfxSource.isPlaying)
+            {
+                sfxSource.Stop();
+            }
 
-        //    sfxSource.Play();
-        //};
+            sfxSource.PlayOneShot(lose);
+        };
+    }
+
+    public void CashOut()
+    {
+        if (sfxSource.isPlaying)
+        {
+            sfxSource.Stop();
+        }
+
+        sfxSource.PlayOneShot(win);
     }
 }
