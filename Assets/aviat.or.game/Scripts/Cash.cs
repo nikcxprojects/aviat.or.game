@@ -12,6 +12,7 @@ public class Cash : MonoBehaviour
 
     private void Update()
     {
-        TextComponent.text = $"{Coefficient.Count * GameManager.Instance.bidCount}";
+        Count = Coefficient.Count * GameManager.Instance.bidCount;
+        TextComponent.text = $"{Count}";
     }
 }

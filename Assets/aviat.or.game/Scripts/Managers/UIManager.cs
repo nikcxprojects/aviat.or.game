@@ -105,7 +105,7 @@ public class UIManager : MonoBehaviour
 
     public void CashOut()
     {
-        Product.OnBuyItem?.Invoke(Mathf.FloorToInt(Cash.Count));
+        Product.OnBuyItem?.Invoke(Mathf.FloorToInt(-Cash.Count));
         Cancel();
     }
 }
