@@ -40,6 +40,11 @@ public class UIManager : MonoBehaviour
         };
     }
 
+    private void Start()
+    {
+        bidText.text = $"{GameManager.Instance.bidCount}";
+    }
+
     public void OpenShop(int id)
     {
         menu.SetActive(false);
@@ -78,6 +83,12 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.bidCount = 0;
         }
 
+        bidText.text = $"{GameManager.Instance.bidCount}";
+    }
+
+    public void SetFixedBid(int bid)
+    {
+        GameManager.Instance.bidCount = bid;
         bidText.text = $"{GameManager.Instance.bidCount}";
     }
 }
